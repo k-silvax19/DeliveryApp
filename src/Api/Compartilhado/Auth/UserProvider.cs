@@ -24,4 +24,12 @@ public sealed class UserProvider(IHttpContextAccessor httpContextAccessor) : IPr
     }
 
     public bool EstaAutenticado => Id.HasValue;
+
+    public string? Email
+    {
+        get
+        {
+            return httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Email);
+        }
+    }
 }

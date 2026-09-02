@@ -7,6 +7,8 @@ public sealed record CadastrarClienteRequest(
     string Senha
 );
 
+public sealed record ClienteResponse(Guid Id, string Nome, string Cpf, string Email);
+
 public sealed record AutenticarClienteRequest(string Email, string Senha);
 
 public sealed record AutenticacaoClienteResponse(

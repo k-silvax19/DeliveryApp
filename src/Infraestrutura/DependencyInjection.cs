@@ -1,3 +1,5 @@
+using DeliveryApp.Dominio.Modulos.Clientes;
+using DeliveryApp.Infraestrutura.Modulos.Clientes;
 using DeliveryApp.Infraestrutura.Orm;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -55,5 +57,7 @@ public static class DependencyInjection
                 });
             }
         });
+
+        services.AddScoped<IRepositorioCliente, RepositorioClienteEmOrm>();
     }
 }

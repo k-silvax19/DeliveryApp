@@ -1,3 +1,4 @@
+using DeliveryApp.Aplicacao.Modulos.Clientes;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DeliveryApp.Aplicacao;
@@ -8,6 +9,9 @@ public static class DependencyInjection
         this IServiceCollection services
     )
     {
-        using var serviceProvider = services.BuildServiceProvider();
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+        });
     }
 }
