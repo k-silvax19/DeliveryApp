@@ -3,6 +3,7 @@ using System;
 using DeliveryApp.Infraestrutura.Orm;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DeliveryApp.Infraestrutura.Orm.Migrations
 {
     [DbContext(typeof(DeliveryAppDbContext))]
-    partial class DeliveryAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260907180228_AddEstabelecimentos")]
+    partial class AddEstabelecimentos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,6 +48,50 @@ namespace DeliveryApp.Infraestrutura.Orm.Migrations
                     b.ToTable("TBClientes", (string)null);
                 });
 
+            modelBuilder.Entity("DeliveryApp.Dominio.Modulos.Estabelecimentos.Estabelecimento", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AreaAtendimento")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Documento")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("character varying(14)");
+
+                    b.Property<string>("Endereco")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<TimeOnly>("HorarioAbertura")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<TimeOnly>("HorarioFechamento")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<string>("NomeComercial")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TBEstabelecimentos", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
                     b.Property<Guid>("Id")
@@ -72,6 +119,13 @@ namespace DeliveryApp.Infraestrutura.Orm.Migrations
                     b.ToTable("AspNetRoles", (string)null);
 
                     b.HasData(
+                        new
+                        {
+                            Id = new Guid("01a06851-5e71-7ae2-822d-21e2fadcffa4"),
+                            ConcurrencyStamp = "01a06852-c767-7d97-84e4-6b5f0775f3e5",
+                            Name = "Estabelecimento",
+                            NormalizedName = "ESTABELECIMENTO"
+                        },
                         new
                         {
                             Id = new Guid("01a058f4-a048-79a3-b1a6-0f01d629a126"),
@@ -254,6 +308,15 @@ namespace DeliveryApp.Infraestrutura.Orm.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
                         .WithOne()
                         .HasForeignKey("DeliveryApp.Dominio.Modulos.Clientes.Cliente", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DeliveryApp.Dominio.Modulos.Estabelecimentos.Estabelecimento", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
+                        .WithOne()
+                        .HasForeignKey("DeliveryApp.Dominio.Modulos.Estabelecimentos.Estabelecimento", "Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
