@@ -1,4 +1,6 @@
+using DeliveryApp.Dominio.Compartilhado.Auth;
 using DeliveryApp.Dominio.Modulos.Clientes;
+using DeliveryApp.Infraestrutura.Auth;
 using DeliveryApp.Infraestrutura.Modulos.Clientes;
 using DeliveryApp.Infraestrutura.Orm;
 using Microsoft.AspNetCore.Identity;
@@ -15,6 +17,9 @@ public static class DependencyInjection
         IConfiguration configuration
     )
     {
+        services.AddScoped<IGerenciadorDeIdentidade, GerenciadorDeIdentidade>();
+        services.AddScoped<IRepositorioCliente, RepositorioClienteEmOrm>();
+
         services.AddDataProtection();
         services.AddIdentityCore<IdentityUser<Guid>>(options =>
         {

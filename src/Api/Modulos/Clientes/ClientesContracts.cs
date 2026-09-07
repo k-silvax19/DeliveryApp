@@ -7,7 +7,10 @@ public sealed record CadastrarClienteRequest(
     string Senha
 );
 
-public sealed record ClienteResponse(Guid Id, string Nome, string Cpf, string Email);
+public sealed record CadastrarClienteResponse(
+    Guid Id,
+    string Nome
+);
 
 public sealed record AutenticarClienteRequest(string Email, string Senha);
 
@@ -16,3 +19,5 @@ public sealed record AutenticacaoClienteResponse(
     string AccessToken,
     DateTime DataExpiracaoEmUtc
 );
+
+public sealed record ClienteResponse(Guid Id, string Nome, string Cpf, string Email);
