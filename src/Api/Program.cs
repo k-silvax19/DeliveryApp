@@ -98,6 +98,7 @@ if (app.Environment.IsDevelopment())
 
     var dbContext = scope.ServiceProvider.GetRequiredService<DeliveryAppDbContext>();
 
+
     dbContext.Database.Migrate();
 
     app.UseSwagger();

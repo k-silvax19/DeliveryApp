@@ -1,4 +1,5 @@
 using DeliveryApp.Dominio.Modulos.Clientes;
+using DeliveryApp.Infraestrutura.Compartilhado.Orm;
 using DeliveryApp.Infraestrutura.Orm;
 using Microsoft.EntityFrameworkCore;
 

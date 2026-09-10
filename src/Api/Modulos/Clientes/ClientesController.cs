@@ -40,7 +40,7 @@ public sealed class ClientesController(
 
         return Ok(response);
     }
-
+    
     [AllowAnonymous]
     [HttpPost("cadastro")]
     public async Task<ActionResult<CadastrarClienteResponse>> Cadastrar(
