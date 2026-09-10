@@ -1,7 +1,9 @@
 using DeliveryApp.Dominio.Compartilhado.Auth;
+using DeliveryApp.Dominio.Modulos.Cardapio;
 using DeliveryApp.Dominio.Modulos.Clientes;
 using DeliveryApp.Dominio.Modulos.Estabelecimentos;
 using DeliveryApp.Infraestrutura.Compartilhado.Auth;
+using DeliveryApp.Infraestrutura.Modulos.Cardapio;
 using DeliveryApp.Infraestrutura.Modulos.Clientes;
 using DeliveryApp.Infraestrutura.Modulos.Estabelecimentos;
 using DeliveryApp.Infraestrutura.Orm;
@@ -67,5 +69,7 @@ public static class DependencyInjection
 
         services.AddScoped<IRepositorioCliente, RepositorioClienteEmOrm>();
         services.AddScoped<IRepositorioEstabelecimento, RepositorioEstabelecimentoEmOrm>();
+        services.AddScoped<IRepositorioProduto, RepositorioProdutoEmOrm>();
+        services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmOrm>();
     }
 }
