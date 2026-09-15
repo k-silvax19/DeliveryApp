@@ -9,6 +9,11 @@ public sealed class RepositorioClienteEmOrm(
     DeliveryAppDbContext dbContext
 ) : RepositorioBaseEmOrm<Cliente>(dbContext), IRepositorioCliente
 {
+    public Task<bool> ExistePorIdAsync(Guid clienteId, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<bool> ExisteRegistroComCpfAsync(
         string cpf,
         CancellationToken cancellationToken = default

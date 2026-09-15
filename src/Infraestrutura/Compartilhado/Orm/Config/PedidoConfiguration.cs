@@ -27,7 +27,7 @@ public sealed class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
         builder.Property(p => p.Subtotal)
             .HasPrecision(10, 2)
             .IsRequired();
-  
+
         builder.Property(p => p.Total)
             .HasPrecision(10, 2)
             .IsRequired();
@@ -51,6 +51,11 @@ public sealed class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
         builder.HasMany(p => p.Itens)
             .WithOne()
             .HasForeignKey(i => i.PedidoId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(p => p.Historico)
+            .WithOne()
+            .HasForeignKey(h => h.PedidoId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
@@ -83,6 +88,8 @@ public sealed class ItemPedidoConfiguration : IEntityTypeConfiguration<ItemPedid
             .WithOne()
             .HasForeignKey(c => c.ItemPedidoId)
             .OnDelete(DeleteBehavior.Cascade);
+
+
     }
 }
 
@@ -102,5 +109,35 @@ public sealed class ComplementoItemPedidoConfiguration : IEntityTypeConfiguratio
         builder.Property(c => c.PrecoAdicional)
             .HasPrecision(10, 2)
             .IsRequired();
+    }
+}
+
+public sealed class TransicaoStatusPedidoConfiguration : IEntityTypeConfiguration<TransicaoStatusPedido>
+{
+    public void Configure(EntityTypeBuilder<TransicaoStatusPedido> builder)
+    {
+        builder.ToTable("TBTransicoesStatusPedido");
+
+        builder.HasKey(t => t.Id);
+        builder.Property(t => t.Id).ValueGeneratedNever();
+
+        builder.Property(t => t.StatusAnterior)
+            .HasConversion<string>()
+            .HasMaxLength(30);
+
+        builder.Property(t => t.StatusAtual)
+            .HasConversion<string>()
+            .HasMaxLength(30)
+            .IsRequired();
+
+        builder.Property(t => t.TipoUsuario)
+            .HasConversion<string>()
+            .HasMaxLength(30)
+            .IsRequired();
+
+        builder.Property(t => t.Motivo)
+            .HasMaxLength(TransicaoStatusPedido.TamanhoMaximoMotivo);
+
+        builder.HasIndex(t => new { t.PedidoId, t.OcorridaEmUtc });
     }
 }

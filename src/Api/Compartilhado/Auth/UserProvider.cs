@@ -32,4 +32,11 @@ public sealed class UserProvider(IHttpContextAccessor httpContextAccessor) : IPr
             return httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Email);
         }
     }
+
+    public bool PossuiTipo(TipoUsuario tipoUsuario)
+    {
+        ClaimsPrincipal? user = httpContextAccessor.HttpContext?.User;
+
+        return user?.Identity?.IsAuthenticated == true && user.IsInRole(tipoUsuario.ToString());
+    }
 }
