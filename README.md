@@ -394,14 +394,6 @@ O **DeliveryApp** foi desenvolvido como projeto de estudo para aplicar conceitos
 
 ## 👨‍💻 Autor
 
-**Kauan da Silva de Matos Pinto**
+**Kauan Silva**
 
-Desenvolvedor em formação com foco no ecossistema **C# / .NET**, desenvolvimento de APIs, testes automatizados e aplicações web.
 
----
-
-## 📌 Status
-
-🚧 **Em desenvolvimento**
-
-Novos módulos, regras de negócio, testes e melhorias de arquitetura podem ser adicionados conforme a evolução do projeto.
